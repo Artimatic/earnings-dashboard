@@ -20,14 +20,6 @@ function executeRegExp(regex, data){
 }
 
 class EarningsService extends BaseService {
-
-    /**
-     * @name checkSubdomainExists
-     * Return whether an account with the given subdomain exists or not in xaf-accounts
-     *
-     * @param subdomain {string}
-     * @return {Object} {taken: boolean}
-     */
     getData(ticker) {
         return Promise.try(() => {
             var url = 'https://www.estimize.com/'+ticker;
@@ -44,7 +36,7 @@ class EarningsService extends BaseService {
                     return cheerio.load(body);
                 }
             };
-
+            //TODO Add check for robots.txt
             return request(options).then(function ($) {
                 var page = $.html();
 
@@ -79,8 +71,6 @@ class EarningsService extends BaseService {
                     });
                 });
 
-console.log(foundItems);
-
                 let reportsArray = [];
 
                 _.forEach(foundItems.reportsAt, function(value, key) {
@@ -89,7 +79,7 @@ console.log(foundItems);
                     let newObjKey = arrayItem[0].replace(/\"/gi, "");
                     let newObjValue = arrayItem[1].replace(/\"/gi, "");
                     newObj.reportsAt = newObjValue;
-                    
+
                     _.forEach(regexHash, function(regex, regexName) {
                         let dataTypeArray = foundItems[regexName];
                         let reportValue = dataTypeArray[key];
