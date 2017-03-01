@@ -1,5 +1,5 @@
-# starter-node
-Starter Template with Angular JS and Gulp
+# cash-node
+Web app for getting and manipulating earnings report data
 
 ## requirements
 - Gulp
@@ -12,4 +12,4 @@ Starter Template with Angular JS and Gulp
 
 ## run
 
-grunt serve
+gulp
